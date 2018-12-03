@@ -12,8 +12,8 @@ namespace lagerhåndtering
 		{   //variablem bliver deklareret her, da det ellers ikke kan burges i while condition
 			int userInput;
 			ItemRepository ir = new ItemRepository();
-			ir.SetUpItems();
-			//ir.Save();
+			//ir.SetUpItems();
+			ir.Load();
 			//Loopet der laver at menuen gentages hele tiden
 			do
 			{
@@ -35,6 +35,7 @@ namespace lagerhåndtering
 				Console.Clear();
 			}
 			while (userInput != 0);
+			ir.Save();
 		}
 
 

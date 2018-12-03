@@ -118,24 +118,38 @@ namespace lagerhåndtering
 
 				foreach (Item i in items)
 				{
-					writer.WriteLine("MALING;" + i.Name + ";" + "QUANTITY;" + i.Quantity + ";" + "PRICE;" + i.Price + ";");
+					writer.WriteLine("MALING;" + i.Name + ";" + "QUANTITY;" + i.Quantity + ";" + "PRICE;" + i.Price);
 				}
 				writer.Close();
 			}
-			catch(Exception e)
+			catch(Exception writer)
 			{
-				Console.WriteLine("UPS der gik noget galt " + e.Message);
+				Console.WriteLine("UPS der gik noget galt " + writer.Message);
 			}
-
-
-
-
-			//throw new NotImplementedException();
 		}
 
 		public void Load()
 		{
-			throw new NotImplementedException();
+			try
+			{
+				string filename = "ProductList.txt";
+				StreamReader reader = new StreamReader(filename);
+
+				string[] parts = new string[6];
+				string line;
+				while(reader.EndOfStream == false)
+				{
+					line = reader.ReadLine();
+					parts = line.Split(';');
+					Item i = new Item(parts[1], int.Parse(parts[3]), double.Parse(parts[5]));
+					AddItem(i);
+				}
+				reader.Close();
+			}
+			catch (Exception reader)
+			{
+				Console.WriteLine("UPS der gik noget galt " + reader.Message);
+			}
 		}
 	}
 }
