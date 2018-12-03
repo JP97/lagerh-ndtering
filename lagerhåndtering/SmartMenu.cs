@@ -13,6 +13,7 @@ namespace lagerhåndtering
 			int userInput;
 			ItemRepository ir = new ItemRepository();
 			ir.SetUpItems();
+			//ir.Save();
 			//Loopet der laver at menuen gentages hele tiden
 			do
 			{

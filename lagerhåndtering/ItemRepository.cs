@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace lagerhåndtering
 {
-	public class ItemRepository
+	public class ItemRepository : IPersistible
 	{
 		private List<Item> items = new List<Item>();
 
@@ -106,6 +107,35 @@ namespace lagerhåndtering
 				new Item("Blå Maling", 33, 12.89),
 				new Item("Violet Maling", 67, 72.50),
 				};
+		}
+
+		public void Save()
+		{
+			try
+			{
+				string filename = "ProductList.txt";
+				StreamWriter writer = new StreamWriter(filename);
+
+				foreach (Item i in items)
+				{
+					writer.WriteLine("MALING;" + i.Name + ";" + "QUANTITY;" + i.Quantity + ";" + "PRICE;" + i.Price + ";");
+				}
+				writer.Close();
+			}
+			catch(Exception e)
+			{
+				Console.WriteLine("UPS der gik noget galt " + e.Message);
+			}
+
+
+
+
+			//throw new NotImplementedException();
+		}
+
+		public void Load()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
